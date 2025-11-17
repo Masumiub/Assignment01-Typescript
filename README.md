@@ -1,12 +1,4 @@
-🎯 Interview Questions - Blog Task
-
-Blog Post (in Bangla): Answer any 2 of the questions below:
-
-- What are some differences between interfaces and types in TypeScript?
-- What is the use of the keyof keyword in TypeScript? Provide an example.
-- Explain the difference between any, unknown, and never types in TypeScript.
-- What is the use of enums in TypeScript? Provide an example of a numeric and string enum.
-- Provide an example of using union and intersection types in TypeScript.
+# 🎯 Interview Questions - Blog Task
 
 
 # What are some differences between interfaces and types in TypeScript?
@@ -25,7 +17,7 @@ TypeScript-এ interface এবং type alias – দুটোই object এর 
 
 
 3. Interface - extend করা যায় (inheritance খুব সহজ)
-
+```
 interface A {
   name: string;
 }
@@ -33,6 +25,7 @@ interface A {
 interface B extends A {
   age: number;
 }
+```
 
 4. Type — extend করা যায়, কিন্তু syntax আলাদা
 

@@ -1,13 +1,13 @@
 type InputValueType = string | number | boolean;
 
-function formatValue (value: InputValueType): InputValueType{
-    if (typeof value === 'string'){
+function formatValue(value: InputValueType): InputValueType {
+    if (typeof value === 'string') {
         return value.toUpperCase();
     }
-    else if(typeof value === 'number'){
+    else if (typeof value === 'number') {
         return value * 10;
     }
-    else if (typeof value === 'boolean'){
+    else if (typeof value === 'boolean') {
         return !value;
     }
     return value;
@@ -15,11 +15,22 @@ function formatValue (value: InputValueType): InputValueType{
 
 
 
-type InputTypePro2 = string | Array<any>;
+type InputTypePro2 = string | any[];
 
-function getLength (inputValue: InputTypePro2): number {
-    return inputValue.length;
+function getLength(inputValue: InputTypePro2): number {
+    if (typeof inputValue === "string") {
+        return inputValue.length;
+    }
+
+    if (Array.isArray(inputValue)) {
+        return inputValue.length;
+    }
+
+    return 0;
 }
+
+
+
 
 interface PersonType {
     name: string;
@@ -27,20 +38,21 @@ interface PersonType {
     getDetails(): string;
 }
 
-class Person implements PersonType{
+class Person implements PersonType {
     name: string;
     age: number;
 
-    constructor(name: string, age: number){
+    constructor(name: string, age: number) {
         this.name = name;
         this.age = age;
     }
 
-     getDetails(): string{
+    getDetails(): string {
         return `'Name: ${this.name}, Age: ${this.age}'`;
-     }
-     
+    }
+
 }
+
 
 
 
@@ -51,7 +63,7 @@ type BookType = {
 
 type BooksArrayType = BookType[];
 
-function filterByRating(items: BooksArrayType): BooksArrayType{
+function filterByRating(items: BooksArrayType): BooksArrayType {
     return items.filter(item => item.rating >= 4);
 }
 
@@ -65,6 +77,8 @@ function filterByRating(items: BooksArrayType): BooksArrayType{
 
 
 
+
+
 type UserType = {
     id: number;
     name: string;
@@ -74,7 +88,7 @@ type UserType = {
 
 type UsersArrayType = UserType[];
 
-function filterActiveUsers(Users : UsersArrayType): UsersArrayType{
+function filterActiveUsers(Users: UsersArrayType): UsersArrayType {
     return Users.filter(User => User.isActive === true)
 }
 
@@ -88,6 +102,7 @@ function filterActiveUsers(Users : UsersArrayType): UsersArrayType{
 
 
 
+
 interface Book {
     title: string,
     author: string,
@@ -95,7 +110,10 @@ interface Book {
     isAvailable: boolean
 }
 
-function printBookDetails(inputBook : Book ): string{
+function printBookDetails(inputBook: Book): string {
+    console.log(
+        `Title: ${inputBook.title}, Author: ${inputBook.author}, Published: ${inputBook.publishedYear}, Available: ${inputBook.isAvailable ? "Yes" : "No"}`
+    );
     return `Title: ${inputBook.title}, Author: ${inputBook.author}, Published: ${inputBook.publishedYear}, Available: ${inputBook.isAvailable ? "Yes" : "No"}`
 }
 
@@ -110,58 +128,53 @@ function printBookDetails(inputBook : Book ): string{
 
 
 
-function getUniqueValues(array1: number[], array2: number[]): number[]{
-    const result: number[] = [];
+
+function getUniqueValues<T extends number | string>(array1: T[], array2: T[]): T[] {
+    const result: T[] = [];
+    const seen: { [key: string]: boolean } = {};
 
     const combinedArray = [...array1, ...array2];
 
-    for(let i=0; i<combinedArray.length; i++){
-        const currentValue = combinedArray[i];
+    for (let i = 0; i < combinedArray.length; i++) {
+        const value = combinedArray[i];
+        const key = typeof value + value; 
 
-        let isDuplicate = false;
-
-        for(let j=0; j<result.length; j++){
-            if(result[j] === currentValue){
-                isDuplicate = true;
-                break;
-            }
-        }
-
-        if(!isDuplicate){
-            result.push(currentValue);
+        if (!seen[key]) {
+            seen[key] = true;
+            result.push(value);
         }
     }
-
 
     return result;
 }
 
-// const array1 = [1, 2, 3, 4, 5, 5, 6, 7];
-// const array2 = [3, 4, 5, 6, 7];
-// console.log(getUniqueValues(array1, array2));
+
+// const fruits1 = ['apple', 'banana', 'mango'];
+// const fruits2 = ['banana', 'kiwi', 'apple'];
+// console.log(getUniqueValues(fruits1, fruits2));
 
 
 
 type ProductType = {
     name: string;
     price: number;
-    quantity : number;
+    quantity: number;
     discount?: number;
 }
 
 type ProductArrayType = ProductType[];
 
-function calculateTotalPrice(products: ProductArrayType): number{
-    return products.reduce((total, product)=> {
+function calculateTotalPrice(products: ProductArrayType): number {
+    return products.reduce((total, product) => {
         const mainPrice = product.price * product.quantity;
 
-        if(product.discount){
+        if (product.discount) {
             const discountAmount = mainPrice * (product.discount / 100);
             return total + (mainPrice - discountAmount);
         }
 
         return total + mainPrice;
-    },0)
+    }, 0)
 }
 
 // const products: ProductArrayType = [
