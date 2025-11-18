@@ -67,14 +67,6 @@ function filterByRating(items: BooksArrayType): BooksArrayType {
     return items.filter(item => item.rating >= 4);
 }
 
-// const books: BooksArrayType = [
-//     { title: 'Book A', rating: 4.5 },
-//     { title: 'Book B', rating: 3.2 },
-//     { title: 'Book C', rating: 5.0 },
-// ];
-
-// console.log(filterByRating(books));
-
 
 
 
@@ -92,13 +84,6 @@ function filterActiveUsers(Users: UsersArrayType): UsersArrayType {
     return Users.filter(User => User.isActive === true)
 }
 
-// const users = [
-//   { id: 1, name: 'Rakib', email: 'rakib@example.com', isActive: true },
-//   { id: 2, name: 'Asha', email: 'asha@example.com', isActive: false },
-//   { id: 3, name: 'Rumi', email: 'rumi@example.com', isActive: true },
-// ];
-
-// console.log(filterActiveUsers(users));
 
 
 
@@ -117,14 +102,7 @@ function printBookDetails(inputBook: Book): string {
     return `Title: ${inputBook.title}, Author: ${inputBook.author}, Published: ${inputBook.publishedYear}, Available: ${inputBook.isAvailable ? "Yes" : "No"}`
 }
 
-// const myBook: Book = {
-//   title: 'The Great Gatsby',
-//   author: 'F. Scott Fitzgerald',
-//   publishedYear: 1925,
-//   isAvailable: true,
-// };
 
-//console.log(printBookDetails(myBook));
 
 
 
@@ -148,10 +126,6 @@ function getUniqueValues<T extends number | string>(array1: T[], array2: T[]): T
     return result;
 }
 
-
-// const fruits1 = ['apple', 'banana', 'mango'];
-// const fruits2 = ['banana', 'kiwi', 'apple'];
-// console.log(getUniqueValues(fruits1, fruits2));
 
 
 
@@ -177,11 +151,5 @@ function calculateTotalPrice(products: ProductArrayType): number {
     }, 0)
 }
 
-// const products: ProductArrayType = [
-//     { name: 'Pen', price: 10, quantity: 2 },
-//     { name: 'Notebook', price: 25, quantity: 3, discount: 10 },
-//     { name: 'Bag', price: 50, quantity: 1, discount: 20 },
-// ];
 
-// console.log(calculateTotalPrice(products));
 
